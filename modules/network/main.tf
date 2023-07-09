@@ -1,12 +1,4 @@
 # ------------------------------
-# Locals
-# ------------------------------
-locals {
-  project = "terraform-practice"
-  env     = "dev"
-}
-
-# ------------------------------
 # VPC
 # ------------------------------
 
@@ -16,7 +8,7 @@ resource "aws_vpc" "vpc" {
   assign_generated_ipv6_cidr_block = false
 
   tags = {
-    Name = "${local.project}-${local.env}-vpc"
+    Name = "${var.project}-${var.env}-vpc"
   }
 }
 
@@ -30,7 +22,7 @@ resource "aws_subnet" "public_subnet_1a" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "${local.project}-${local.env}-public-subnet-1a"
+    Name = "${var.project}-${var.env}-public-subnet-1a"
   }
 }
 
@@ -41,7 +33,7 @@ resource "aws_subnet" "public_subnet_1c" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "${local.project}-${local.env}-public-subnet-1c"
+    Name = "${var.project}-${var.env}-public-subnet-1c"
   }
 }
 
@@ -52,7 +44,7 @@ resource "aws_subnet" "private_subnet_1a" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "${local.project}-${local.env}-private-subnet-1a"
+    Name = "${var.project}-${var.env}-private-subnet-1a"
   }
 }
 
@@ -63,7 +55,7 @@ resource "aws_subnet" "private_subnet_1c" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "${local.project}-${local.env}-private-subnet-1c"
+    Name = "${var.project}-${var.env}-private-subnet-1c"
   }
 }
 
@@ -74,7 +66,7 @@ resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name = "${local.project}-${local.env}-public-rt"
+    Name = "${var.project}-${var.env}-public-rt"
   }
 }
 
@@ -92,7 +84,7 @@ resource "aws_route_table" "private_rt" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name = "${local.project}-${local.env}-private-rt"
+    Name = "${var.project}-${var.env}-private-rt"
   }
 }
 
@@ -113,7 +105,7 @@ resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name = "${local.project}-${local.env}-igw"
+    Name = "${var.project}-${var.env}-igw"
   }
 }
 

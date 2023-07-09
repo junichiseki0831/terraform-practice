@@ -19,5 +19,7 @@ provider "aws" {
 }
 
 module "network" {
-  source = "../modules/network/dev"
+  source = "../modules/network"
+  project = "terraform-practice"
+  env     = "dev"
 }
