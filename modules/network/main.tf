@@ -3,12 +3,12 @@
 # ------------------------------
 
 resource "aws_vpc" "vpc" {
-  cidr_block                       = "192.168.0.0/16"
+  cidr_block                       = var.vpc_cidr_block
   instance_tenancy                 = "default"
   assign_generated_ipv6_cidr_block = false
 
   tags = {
-    Name = "${var.project}-${var.env}-vpc"
+    Name = var.vpc_name
   }
 }
 
@@ -33,7 +33,7 @@ resource "aws_subnet" "public_subnet_1c" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "${var.project}-${var.env}-public-subnet-1c"
+    Name = var.public_subnet_name_1c
   }
 }
 
@@ -44,7 +44,7 @@ resource "aws_subnet" "private_subnet_1a" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "${var.project}-${var.env}-private-subnet-1a"
+    Name = var.private_subnet_name_1a
   }
 }
 
@@ -55,7 +55,7 @@ resource "aws_subnet" "private_subnet_1c" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "${var.project}-${var.env}-private-subnet-1c"
+    Name = var.private_subnet_name_1c
   }
 }
 
@@ -66,7 +66,7 @@ resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name = "${var.project}-${var.env}-public-rt"
+    Name = var.public_route_table_name
   }
 }
 
@@ -84,7 +84,7 @@ resource "aws_route_table" "private_rt" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name = "${var.project}-${var.env}-private-rt"
+    Name = var.private_route_table_name
   }
 }
 
@@ -105,7 +105,7 @@ resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name = "${var.project}-${var.env}-igw"
+    Name = var.internet_gateway_name
   }
 }
 
