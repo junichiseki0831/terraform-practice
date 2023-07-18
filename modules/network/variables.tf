@@ -68,19 +68,3 @@ variable "private_subnet_name_1c" {
 variable "internet_gateway_name" {
   type = string
 }
-
-variable "elastic_ip_name_1a" {
-  type = string
-}
-
-variable "elastic_ip_name_1c" {
-  type = string
-}
-
-variable "nat_gateway_name_1a" {
-  type = string
-}
-
-variable "nat_gateway_name_1c" {
-  type = string
-}
