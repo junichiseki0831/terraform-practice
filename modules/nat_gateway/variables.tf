@@ -1,23 +1,11 @@
-variable "elastic_ip_name_1a" {
+variable "elastic_ip_name_nat" {
   type = string
 }
 
-variable "elastic_ip_name_1c" {
+variable "nat_gateway_name" {
   type = string
 }
 
-variable "nat_gateway_name_1a" {
-  type = string
-}
-
-variable "nat_gateway_name_1c" {
-  type = string
-}
-
-variable "public_subnet_id_1a" {
-  type = string
-}
-
-variable "public_subnet_id_1c" {
+variable "public_subnet_id" {
   type = string
 }
