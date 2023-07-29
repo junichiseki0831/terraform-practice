@@ -44,3 +44,17 @@ module "network" {
   private_subnet_name_1c   = "${local.project}-${local.env}-private-subnet-${local.availability_zone_1c}"
   internet_gateway_name    = "${local.project}-${local.env}-igw"
 }
+
+module "nat_gateway_1a" {
+  source              = "../modules/nat_gateway"
+  elastic_ip_name_nat = "${local.project}-${local.env}-eip-${local.availability_zone_1a}"
+  nat_gateway_name    = "${local.project}-${local.env}-ngw-${local.availability_zone_1a}"
+  public_subnet_id    = module.network.public_subnet_id_1a
+}
+
+module "nat_gateway_1c" {
+  source              = "../modules/nat_gateway"
+  elastic_ip_name_nat = "${local.project}-${local.env}-eip-${local.availability_zone_1c}"
+  nat_gateway_name    = "${local.project}-${local.env}-ngw-${local.availability_zone_1c}"
+  public_subnet_id    = module.network.public_subnet_id_1c
+}

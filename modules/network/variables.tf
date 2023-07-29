@@ -1,10 +1,3 @@
-# variable "project" {
-#   type = string
-# }
-
-# variable "env" {
-#   type = string
-# }
 variable "vpc_cidr_block" {
   default = "192.168.0.0/16"
   type = string
