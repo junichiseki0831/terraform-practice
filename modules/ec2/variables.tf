@@ -2,6 +2,10 @@ variable "key_pair_name" {
   type = string
 }
 
+variable "ami" {
+  type = string
+}
+
 variable "ec2_name" {
   type = string
 }
