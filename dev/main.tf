@@ -58,3 +58,71 @@ module "nat_gateway_1c" {
   nat_gateway_name    = "${local.project}-${local.env}-ngw-${local.availability_zone_1c}"
   public_subnet_id    = module.network.public_subnet_id_1c
 }
+
+module "ec2_ssh_1a" {
+  source                      = "../modules/ec2"
+  key_pair_name               = data.aws_key_pair.keypair.key_name
+  ami                         = data.aws_ami.amazon_linux_2.id
+  ec2_name                    = "${local.project}-${local.env}-ssh-ec2-${local.availability_zone_1a}"
+  subnet_id                   = module.network.public_subnet_id_1a
+  associate_public_ip_address = true
+  security_group_ids          = [module.security_group_ssh.security_group_id]
+}
+
+module "ec2_ssh_1c" {
+  source                      = "../modules/ec2"
+  key_pair_name               = data.aws_key_pair.keypair.key_name
+  ami                         = data.aws_ami.amazon_linux_2.id
+  ec2_name                    = "${local.project}-${local.env}-ssh-ec2-${local.availability_zone_1c}"
+  subnet_id                   = module.network.public_subnet_id_1c
+  associate_public_ip_address = true
+  security_group_ids          = [module.security_group_ssh.security_group_id]
+}
+
+module "ec2_app_1a" {
+  source                      = "../modules/ec2"
+  key_pair_name               = data.aws_key_pair.keypair.key_name
+  ami                         = data.aws_ami.amazon_linux_2.id
+  ec2_name                    = "${local.project}-${local.env}-ssh-ec2-${local.availability_zone_1a}"
+  subnet_id                   = module.network.private_subnet_id_1a
+  associate_public_ip_address = false
+  security_group_ids          = [module.security_group_app.security_group_id]
+}
+
+module "ec2_app_1c" {
+  source                      = "../modules/ec2"
+  key_pair_name               = data.aws_key_pair.keypair.key_name
+  ami                         = data.aws_ami.amazon_linux_2.id
+  ec2_name                    = "${local.project}-${local.env}-ssh-ec2-${local.availability_zone_1c}"
+  subnet_id                   = module.network.private_subnet_id_1c
+  associate_public_ip_address = false
+  security_group_ids          = [module.security_group_app.security_group_id]
+}
+
+module "security_group_ssh" {
+  source              = "../modules/security_group"
+  security_group_name = "${local.project}-${local.env}-ssh-sg"
+  vpc_id              = module.network.vpc_id
+}
+
+module "security_group_app" {
+  source              = "../modules/security_group"
+  security_group_name = "${local.project}-${local.env}-app-sg"
+  vpc_id              = module.network.vpc_id
+}
+
+module "ssh-sg-inbound-ssh" {
+  source            = "../modules/security_group_rule"
+  protocol          = "ssh"
+  from_port         = 22
+  to_port           = 22
+  security_group_id = module.security_group_ssh.security_group_id
+}
+
+module "app-sg-inbound-ssh" {
+  source            = "../modules/security_group_rule"
+  protocol          = "ssh"
+  from_port         = 22
+  to_port           = 22
+  security_group_id = module.security_group_app.security_group_id
+}

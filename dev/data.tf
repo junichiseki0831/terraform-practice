@@ -1,0 +1,27 @@
+# ---------------------------------------------
+# Ami
+# ---------------------------------------------
+data "aws_ami" "amazon_linux_2" {
+  most_recent = true
+  owners      = ["self", "amazon"]
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm-2.0.*-x86_64-gp2"]
+  }
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}
+
+# ---------------------------------------------
+# Key Pair
+# ---------------------------------------------
+data "aws_key_pair" "keypair" {
+  key_name = "my-test-key-1"
+}
