@@ -50,6 +50,7 @@ module "nat_gateway_1a" {
   elastic_ip_name_nat = "${local.project}-${local.env}-eip-${local.availability_zone_1a}"
   nat_gateway_name    = "${local.project}-${local.env}-ngw-${local.availability_zone_1a}"
   public_subnet_id    = module.network.public_subnet_id_1a
+  private_rt_id       = module.network.private_rt_id
 }
 
 module "nat_gateway_1c" {
@@ -57,6 +58,7 @@ module "nat_gateway_1c" {
   elastic_ip_name_nat = "${local.project}-${local.env}-eip-${local.availability_zone_1c}"
   nat_gateway_name    = "${local.project}-${local.env}-ngw-${local.availability_zone_1c}"
   public_subnet_id    = module.network.public_subnet_id_1c
+  private_rt_id       = module.network.private_rt_id
 }
 
 module "ec2_ssh_1a" {
@@ -113,7 +115,7 @@ module "security_group_app" {
 
 module "ssh-sg-inbound-ssh" {
   source            = "../modules/security_group_rule"
-  protocol          = "ssh"
+  protocol          = "tcp"
   from_port         = 22
   to_port           = 22
   security_group_id = module.security_group_ssh.security_group_id
@@ -121,7 +123,7 @@ module "ssh-sg-inbound-ssh" {
 
 module "app-sg-inbound-ssh" {
   source            = "../modules/security_group_rule"
-  protocol          = "ssh"
+  protocol          = "tcp"
   from_port         = 22
   to_port           = 22
   security_group_id = module.security_group_app.security_group_id
