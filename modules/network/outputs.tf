@@ -17,3 +17,7 @@ output "private_subnet_id_1c" {
 output "vpc_id" {
     value = aws_vpc.vpc.id
 }
+
+output "private_rt_id" {
+    value = aws_route_table.private_rt.id
+}

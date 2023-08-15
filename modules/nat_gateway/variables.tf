@@ -9,3 +9,7 @@ variable "nat_gateway_name" {
 variable "public_subnet_id" {
   type = string
 }
+
+variable "private_rt_id" {
+  type = string
+}

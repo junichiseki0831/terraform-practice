@@ -23,5 +23,5 @@ data "aws_ami" "amazon_linux_2" {
 # Key Pair
 # ---------------------------------------------
 data "aws_key_pair" "keypair" {
-  key_name = "my-test-key-1"
+  key_name = "tfp"
 }
