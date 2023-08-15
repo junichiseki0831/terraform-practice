@@ -21,7 +21,7 @@ resource "aws_nat_gateway" "ngw" {
   }
 }
 
-resource "aws_route" "public_rt_igw_r" {
+resource "aws_route" "private_rt_ngw" {
   route_table_id         = var.private_rt_id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_nat_gateway.ngw.id
